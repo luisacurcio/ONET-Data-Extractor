@@ -365,11 +365,11 @@ li_elements <- html_nodes(cmtop, "li")
 
 # Extract text and hierarchy level of <li> elements
 levels_li <- html_attr(li_elements, "id")  # or "id" or another attribute
-descriptions <- html_text(html_nodes(li_elements, "div[class*='cm-desc']"))
+description <- html_text(html_nodes(li_elements, "div[class*='cm-desc']"))
 text_li <- html_text(li_elements)
 
 # Create a dataframe with two columns
-df <- data.frame(Text = text_li, Descriptions = descriptions, Level = levels_li)
+df <- data.frame(Text = text_li, Descriptions = description, Level = levels_li)
 
 # New column with the size of the levels
 df$level_size <- nchar(df$Level) - 12
@@ -404,7 +404,7 @@ elements_li2 <- html_nodes(cmtop2, "li")
 levels_li2 <- html_attr(elements_li2, "id")  
 description2 <- html_text(html_nodes(elements_li2, "div[class*='cm-desc']"))
 text_li2 <- html_text(elements_li2)
-df2 <- data.frame(Text = text_li2, Descriptions = descriptions2, Level = levels_li2)
+df2 <- data.frame(Text = text_li2, Descriptions = description2, Level = levels_li2)
 df2$level_size <- nchar(df2$Level) - 14
 df2$hierarchy <- df2$level_size
 df2 <- df2[, c(1, 2, ncol(df2))]
@@ -431,20 +431,20 @@ levels_li3 <- html_attr(elements_li3, "id")
 description3 <- html_text(html_nodes(elements_li3, "div[class*='cm-desc']"))
 text_li3 <- html_text(elements_li3)
 df3 <- data.frame(Text = text_li3, Descriptions = description3,Level = levels_li3)
-df3$tamanho_levels <- nchar(df3$Level)-12
-df3$hierarquia <- ifelse(df3$tamanho_levels == 1, 1,
-                        ifelse(df3$tamanho_levels == 3, 2, 3))
+df3$size_levels <- nchar(df3$Level)-12
+df3$hierarchy <- ifelse(df3$size_levels == 1, 1,
+                        ifelse(df3$size_levels == 3, 2, 3))
 df3 <- df3[, c(1,2, ncol(df3))]
 df3$major_skill <- "Knowledge"
 df3$Text <- gsub("\n  \n  Folder (closedopen)\n    ", "", df3$Text, fixed = TRUE)
-df3$Text <- ifelse(df3$hierarquia %in% c(1, 2) ,
+df3$Text <- ifelse(df3$hierarchy %in% c(1, 2) ,
                    sapply(strsplit(df3$Text, "\n"), function(x) x[1]),
                    df3$Text)
-df3$Text <- ifelse(df3$hierarquia %in% c(1, 2) ,
+df3$Text <- ifelse(df3$hierarchy %in% c(1, 2) ,
                    df3$Text,
                    sapply(strsplit(df3$Text, "\n  \n    \n    "), function(x) x[2]))
 
-df3$Text <- ifelse(df3$hierarquia %in% c(1, 2),
+df3$Text <- ifelse(df3$hierarchy %in% c(1, 2),
                    df3$Text,
                    sapply(strsplit(df3$Text, "\n"), function(x) x[1]))
 
@@ -463,22 +463,22 @@ levels_li4 <- html_attr(elements_li4, "id")
 description4 <- html_text(html_nodes(elements_li4, "div[class*='cm-desc']"))
 text_li4 <- html_text(elements_li4)
 df4 <- data.frame(Text = text_li4, Descriptions = description4,Level = levels_li4)
-df4$tamanho_levels <- nchar(df4$Level)-12
-df4$hierarquia <- ifelse(df4$tamanho_levels == 1, 1,
-                         ifelse(df4$tamanho_levels == 3, 2, 3))
+df4$size_levels <- nchar(df4$Level)-12
+df4$hierarchy <- ifelse(df4$size_levels == 1, 1,
+                         ifelse(df4$size_levels == 3, 2, 3))
 
 df4 <- df4[, c(1,2, ncol(df4))]
 df4$major_skill <- "Basic Skills"
 df4$Text <- gsub("\n  \n  Folder (closedopen)\n    ", "", df4$Text, fixed = TRUE)
-df4$Text <- ifelse(df4$hierarquia %in% c(1) ,
+df4$Text <- ifelse(df4$hierarchy %in% c(1) ,
                     sapply(strsplit(df4$Text, "\n"), function(x) x[1]),
                     df4$Text)
 
-df4$Text <- ifelse(df4$hierarquia %in% c(1) ,
+df4$Text <- ifelse(df4$hierarchy %in% c(1) ,
                     df4$Text,
                     sapply(strsplit(df4$Text, "\n  \n    \n    "), function(x) x[2]))
 
-df4$Text <- ifelse(df4$hierarquia %in% c(1),
+df4$Text <- ifelse(df4$hierarchy %in% c(1),
                     df4$Text,
                     sapply(strsplit(df4$Text, "\n"), function(x) x[1]))
 
@@ -497,22 +497,22 @@ levels_li5 <- html_attr(elements_li5, "id")
 description5 <- html_text(html_nodes(elements_li5, "div[class*='cm-desc']"))
 text_li5 <- html_text(elements_li5)
 df5 <- data.frame(Text = text_li5, Descriptions = description5,Level = levels_li5)
-df5$tamanho_levels <- nchar(df5$Level)-12
-df5$hierarquia <- ifelse(df5$tamanho_levels == 1, 1,
-                         ifelse(df5$tamanho_levels == 3, 2, 3))
+df5$size_levels <- nchar(df5$Level)-12
+df5$hierarchy <- ifelse(df5$size_levels == 1, 1,
+                         ifelse(df5$size_levels == 3, 2, 3))
 df5 <- df5[, c(1,2, ncol(df5))]
 df5$major_skill <- "Cross Functional Skills"
 df5$Text <- gsub("\n  \n  Folder (closedopen)\n    ", "", df5$Text, fixed = TRUE)
 
-df5$Text <- ifelse(df5$hierarquia %in% c(1) ,
+df5$Text <- ifelse(df5$hierarchy %in% c(1) ,
                     sapply(strsplit(df5$Text, "\n"), function(x) x[1]),
                     df5$Text)
 
-df5$Text <- ifelse(df5$hierarquia %in% c(1) ,
+df5$Text <- ifelse(df5$hierarchy %in% c(1) ,
                     df5$Text,
                     sapply(strsplit(df5$Text, "\n  \n    \n    "), function(x) x[2]))
 
-df5$Text <- ifelse(df5$hierarquia %in% c(1),
+df5$Text <- ifelse(df5$hierarchy %in% c(1),
                     df5$Text,
                     sapply(strsplit(df5$Text, "\n"), function(x) x[1]))
 
@@ -529,22 +529,22 @@ levels_li6 <- html_attr(elements_li6, "id")
 description6 <- html_text(html_nodes(elements_li6, "div[class*='cm-desc']"))
 text_li6 <- html_text(elements_li6)
 df6 <- data.frame(Text = text_li6, Descriptions = description6,Level = levels_li6)
-df6$tamanho_levels <- nchar(df6$Level)-12
-df6$hierarquia <- ifelse(df6$tamanho_levels == 1, 1,
-                         ifelse(df6$tamanho_levels == 3, 2, 3))
+df6$size_levels <- nchar(df6$Level)-12
+df6$hierarchy <- ifelse(df6$size_levels == 1, 1,
+                         ifelse(df6$size_levels == 3, 2, 3))
 df6 <- df6[, c(1,2, ncol(df6))]
 df6$major_skill <- "Work Activities"
 df6$Text <- gsub("\n  \n  Folder (closedopen)\n    ", "", df6$Text, fixed = TRUE)
 
-df6$Text <- ifelse(df6$hierarquia %in% c(1) ,
+df6$Text <- ifelse(df6$hierarchy %in% c(1) ,
                     sapply(strsplit(df6$Text, "\n"), function(x) x[1]),
                     df6$Text)
 
-df6$Text <- ifelse(df6$hierarquia %in% c(1) ,
+df6$Text <- ifelse(df6$hierarchy %in% c(1) ,
                     df6$Text,
                     sapply(strsplit(df6$Text, "\n  \n    \n    "), function(x) x[2]))
 
-df6$Text <- ifelse(df6$hierarquia %in% c(1),
+df6$Text <- ifelse(df6$hierarchy %in% c(1),
                     df6$Text,
                     sapply(strsplit(df6$Text, "\n"), function(x) x[1]))
 
@@ -563,22 +563,22 @@ levels_li7 <- html_attr(elements_li7, "id")
 description7 <- html_text(html_nodes(elements_li7, "div[class*='cm-desc']"))
 text_li7 <- html_text(elements_li7)
 df7 <- data.frame(Text = text_li7, Descriptions = description7,Level = levels_li7)
-df7$tamanho_levels <- nchar(df7$Level)-12
-df7$hierarquia <- ifelse(df7$tamanho_levels == 1, 1,
-                         ifelse(df7$tamanho_levels == 3, 2, 3))
+df7$size_levels <- nchar(df7$Level)-12
+df7$hierarchy <- ifelse(df7$size_levels == 1, 1,
+                         ifelse(df7$size_levels == 3, 2, 3))
 df7 <- df7[, c(1,2, ncol(df7))]
 df7$major_skill <- "Work Activities"
 df7$Text <- gsub("\n  \n  Folder (closedopen)\n    ", "", df7$Text, fixed = TRUE)
 
-df7$Text <- ifelse(df7$hierarquia %in% c(1) ,
+df7$Text <- ifelse(df7$hierarchy %in% c(1) ,
                     sapply(strsplit(df7$Text, "\n"), function(x) x[1]),
                     df7$Text)
 
-df7$Text <- ifelse(df7$hierarquia %in% c(1) ,
+df7$Text <- ifelse(df7$hierarchy %in% c(1) ,
                     df7$Text,
                     sapply(strsplit(df7$Text, "\n  \n    \n    "), function(x) x[2]))
 
-df7$Text <- ifelse(df7$hierarquia %in% c(1),
+df7$Text <- ifelse(df7$hierarchy %in% c(1),
                     df7$Text,
                     sapply(strsplit(df7$Text, "\n"), function(x) x[1]))
 
@@ -596,22 +596,22 @@ levels_li8 <- html_attr(elements_li8, "id")
 description8 <- html_text(html_nodes(elements_li8, "div[class*='cm-desc']"))
 text_li8 <- html_text(elements_li8)
 df8 <- data.frame(Text = text_li8, Descriptions = description8,Level = levels_li8)
-df8$tamanho_levels <- nchar(df8$Level)-12
-df8$hierarquia <- ifelse(df8$tamanho_levels == 1, 1,
-                         ifelse(df8$tamanho_levels == 3, 2, 3))
+df8$size_levels <- nchar(df8$Level)-12
+df8$hierarchy <- ifelse(df8$size_levels == 1, 1,
+                         ifelse(df8$size_levels == 3, 2, 3))
 df8 <- df8[, c(1,2, ncol(df8))]
 df8$major_skill <- "Work Styles"
 df8$Text <- gsub("\n  \n  Folder (closedopen)\n    ", "", df8$Text, fixed = TRUE)
 
-df8$Text <- ifelse(df8$hierarquia %in% c(1) ,
+df8$Text <- ifelse(df8$hierarchy %in% c(1) ,
                     df8$Text,
                     sapply(strsplit(df8$Text, "\n  \n    \n    "), function(x) x[2]))
 
-df8$Text <- ifelse(df8$hierarquia %in% c(1) & grepl("Independence", df8$Text),
+df8$Text <- ifelse(df8$hierarchy %in% c(1) & grepl("Independence", df8$Text),
                     sapply(strsplit(df8$Text, "\n  \n    \n    "), function(x) x[2]),
                     df8$Text)
 
-df8$Text <- ifelse(df8$hierarquia %in% c(1,2),
+df8$Text <- ifelse(df8$hierarchy %in% c(1,2),
                     sapply(strsplit(df8$Text, "\n"), function(x) x[1]))
 
 
@@ -629,18 +629,18 @@ levels_li9 <- html_attr(elements_li9, "id")
 description9 <- html_text(html_nodes(elements_li9, "div[class*='cm-desc']"))
 text_li9 <- html_text(elements_li9)
 df9 <- data.frame(Text = text_li9, Descriptions = description9,Level = levels_li9)
-df9$tamanho_levels <- nchar(df9$Level)-14
-df9$hierarquia <- ifelse(df9$tamanho_levels == 1, 1,
-                         ifelse(df9$tamanho_levels == 3, 2, 3))
+df9$size_levels <- nchar(df9$Level)-14
+df9$hierarchy <- ifelse(df9$size_levels == 1, 1,
+                         ifelse(df9$size_levels == 3, 2, 3))
 df9 <- df9[, c(1,2, ncol(df9))]
 df9$major_skill <- "Work Values"
 
 
-df9$Text <- ifelse(df9$hierarquia %in% c(1),
+df9$Text <- ifelse(df9$hierarchy %in% c(1),
                     sapply(strsplit(df9$Text, "\n  \n    \n    "), function(x) x[2]),
                     df9$Text)
 
-df9$Text <- ifelse(df9$hierarquia %in% c(1,2),
+df9$Text <- ifelse(df9$hierarchy %in% c(1,2),
                     sapply(strsplit(df9$Text, "\n"), function(x) x[1]))
 
 
@@ -652,7 +652,7 @@ View(df_appended)
 df10 <- df_appended[, c(1,3)]
 pivoted_df <- df10 %>%
   mutate(index = row_number()) %>%
-  pivot_wider(names_from = hierarquia, values_from = Text)
+  pivot_wider(names_from = hierarchy, values_from = Text)
 
 
 # Concatenate the data frames horizontally (column-wise)
@@ -664,7 +664,7 @@ pivoted_df<- pivoted_df %>%
   tidyr::fill(., `2`)
 
 
-pivoted_df <- rename(pivoted_df, hierarquia_1= `1`,hierarquia_2= `2`,hierarquia_3= `3`)
+pivoted_df <- rename(pivoted_df, hierarchy_1= `1`,hierarchy_2= `2`,hierarchy_3= `3`)
 pivoted_df<-pivoted_df[, -c(5)]
 
 
@@ -686,6 +686,4 @@ for (csv_file in csv_files) {
 }
 
 saveWorkbook(wb, "data.xlsx")
-
-
 

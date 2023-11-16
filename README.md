@@ -1,6 +1,6 @@
 # Onetonline Data Scraping
 
-This project involves scraping data from the [Onetonline](https://www.onetonline.org) website to collect information about various job-related skills, interests, knowledge, basic skills, cross-functional skills, work activities, work context, work styles, and work values. The scraped data is organized into separate CSV files for each category.
+This project involves scraping data from the [Onetonline](https://www.onetonline.org) website to collect information about various job-related skills, interests, knowledge, basic skills, cross-functional skills, work activities, work context, work styles, and work values. The scraped data is organized into separate CSV files for each category and, at the end, it appends all of them into one CSV file.
 
 ## Required Libraries
 
@@ -12,6 +12,7 @@ Before running the code, make sure you have the following R libraries installed:
 - stringr
 - tidyverse
 - zoo
+- here
 
 You can install these libraries using the `install.packages` function in R.
 

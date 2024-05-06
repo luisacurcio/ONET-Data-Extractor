@@ -1,4 +1,4 @@
-# Onetonline Data Scraping
+# Onet Data Scraping
 
 This repository contains a robust web scraper for extracting detailed labor market data from the [Onetonline](https://www.onetonline.org) website to collect information about various job-related skills, interests, knowledge, basic skills, cross-functional skills, work activities, work context, work styles, and work values. It's designed for data scientists and researchers interested in analyzing occupational information.
 

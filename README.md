@@ -48,4 +48,4 @@ The code then scrapes data related to work context. It extracts data from the [W
 
 ## Scraping Work Styles Data
 
-Data related to work styles is scraped next. The code extracts data from the [Work Styles section](https://www.onetonline.org/find/descriptor/browse/1.C/1.C.1/1.C.4/1.C.5/1.C.3/1.C.7/1.C.2
+Data related to work styles is scraped next. The code extracts data from the [Work Styles section](https://www.onetonline.org/find/descriptor/browse/1.C/1.C.1/1.C.4/1.C.5/1.C.3/1.C.7/1.C.2)
